@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -19,6 +20,10 @@ class ItemResource extends Resource
     protected static ?string $model = Item::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationLabel = 'Items de recorrido';
+
+    protected static ?string $navigationGroup = 'Mentenimientos';
 
     public static function form(Form $form): Form
     {
@@ -32,7 +37,14 @@ class ItemResource extends Resource
     {
         return $table
             ->columns([
-                
+                TextColumn::make('descripcion')
+                    ->searchable()
+                    ->sortable()
+                    ->label('Item principal'),
+                TextColumn::make('created_at')
+                    ->searchable()
+                    ->sortable()
+                    ->datetime(),
             ])
             ->filters([
                 //

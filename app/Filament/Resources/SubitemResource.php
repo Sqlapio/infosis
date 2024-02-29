@@ -6,15 +6,18 @@ use App\Filament\Resources\SubitemResource\Pages;
 use App\Filament\Resources\SubitemResource\RelationManagers;
 use App\Models\Subitem;
 use Filament\Forms;
+use Filament\Tables\Grouping\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class SubitemResource extends Resource
 {
@@ -22,16 +25,30 @@ class SubitemResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'SubItems';
+
+    protected static ?string $navigationGroup = 'Mentenimientos';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('descripcion')->required(),
+                TextInput::make('descripcion')
+
+                    ->required(),
                 Select::make('item_id')
-                    ->relationship('get_subitems', 'descripcion')
+                    ->relationship('get_items', 'descripcion')
+                    ->label('Item padre')
                     ->searchable()
                     ->preload()
                     ->required(),
+                TextInput::make('porcentaje')
+                    ->prefix('%')
+                    ->numeric()
+                    ->minValue(1)
+                    ->maxValue(100)
+                    ->required(),
+                TextInput::make('responsable')->default(Auth::user()->name)->disabled()
             ]);
     }
 
@@ -39,7 +56,21 @@ class SubitemResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('get_items.descripcion')
+                    ->searchable()
+                    ->sortable()
+                    ->label('Item principal'),
+                TextColumn::make('descripcion')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('porcentaje'),
+                TextColumn::make('created_at')
+                    ->searchable()
+                    ->sortable()
+                    ->datetime(),
+            ])
+            ->groups([
+                Group::make('get_items.descripcion')->label('Item'),
             ])
             ->filters([
                 //

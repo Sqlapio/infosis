@@ -29,6 +29,16 @@ class Item extends Model
      */
     public function get_subitems(): HasMany
     {
-        return $this->hasMany(Subitem::class, 'item_id', 'id');
+        return $this->hasMany(Subitem::class, 'item_id' ,'id');
+    }
+
+    /**
+     * Get all of the subitems for the Item
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function get_recorridos(): HasMany
+    {
+        return $this->hasMany(Recorrido::class, 'id');
     }
 }

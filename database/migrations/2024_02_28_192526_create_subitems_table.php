@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('item_id')->unsigned();
             $table->string('descripcion');
-            $table->integer('porcentaje');
+            $table->decimal('porcentaje', 5, 2);
             $table->timestamps();
         });
     }

@@ -5,11 +5,11 @@
 <div class="">
     @if(Auth::check())
     <div class="w-40 h-auto">
-        <img src="{{ asset('image/logos.png') }}" alt="">
+        <img src="{{ asset('image/logoTesoro.png') }}" alt="">
     </div>
     @else
-    <div class="w-fll">
-        <img src="{{ asset('image/logos.png') }}" alt="">
+    <div class="w-48 h-auto">
+        <img src="{{ asset('image/logoTesoro.png') }}" alt="">
     </div>
     @endif
 </div>

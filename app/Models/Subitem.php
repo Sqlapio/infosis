@@ -21,7 +21,18 @@ class Subitem extends Model
     protected $fillable = [
         'item_id',
         'descripcion',
+        'porcentaje',
         'responsable'
     ];
+
+    /**
+     * Get the get_items that owns the Subitem
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function get_items(): HasOne
+    {
+        return $this->hasOne(Item::class, 'id', 'item_id');
+    }
 
 }

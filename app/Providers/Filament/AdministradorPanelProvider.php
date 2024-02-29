@@ -20,12 +20,15 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdministradorPanelProvider extends PanelProvider
 {
+    // protected ?string $maxContentWidth = 'full';
+
     public function panel(Panel $panel): Panel
     {
         return $panel
             ->default()
             ->id('administrador')
             ->path('administrador')
+            ->brandLogo(fn () => view('filament.admin.logo'))
             ->login()
             ->colors([
                 'primary' => Color::Amber,
