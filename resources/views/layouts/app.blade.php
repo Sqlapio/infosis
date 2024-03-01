@@ -15,6 +15,8 @@
         <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
 
 
+        <!-- wireUI -->
+        <wireui:scripts />
 
         <!-- Livewire V3 -->
         @livewireStyles
@@ -23,6 +25,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
+        <x-notifications position="top-right" />
+        <x-dialog z-index="z-50" blur="md" align="center" />
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <livewire:layout.navigation />
 

@@ -4,7 +4,7 @@
 
 <div class="">
     @if(Auth::check())
-    <div class="w-40 h-auto">
+    <div {{ $attributes }}>
         <img src="{{ asset('image/logoTesoro.png') }}" alt="">
     </div>
     @else

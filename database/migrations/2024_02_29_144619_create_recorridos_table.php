@@ -14,18 +14,13 @@ return new class extends Migration
         Schema::create('recorridos', function (Blueprint $table) {
             $table->id();
             $table->integer('item_id');
+            $table->string('descripcion');
             $table->string('operatividad');
             $table->string('fecha_reporte');
             $table->string('area')->default('8.820');
             $table->string('total_personal');
             $table->string('observaciones')->default('Sin observaciones relevantes');
             $table->string('responsable');
-            $table->string('img1');
-            $table->string('img2');
-            $table->string('img3');
-            $table->string('img4');
-            $table->string('img5');
-            $table->string('img6');
             $table->timestamps();
         });
     }
