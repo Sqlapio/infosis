@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Image;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,16 @@ Route::view('/', 'welcome');
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::view('inspeccion', 'inspeccion')
+    ->middleware(['auth', 'verified'])
+    ->name('inspeccion');
+
+Route::view('images', 'images')
+    ->middleware(['auth', 'verified'])
+    ->name('images');
+
+Route::post('/upload/image', [Image::class, 'uploadImages'])->name("pay-plan");
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

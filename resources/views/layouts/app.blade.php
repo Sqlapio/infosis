@@ -14,6 +14,9 @@
 
         <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
 
+        <!-- FilePond -->
+        <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
 
         <!-- wireUI -->
         <wireui:scripts />
@@ -47,5 +50,9 @@
 
         <!-- Livewire V3 -->
         @livewireScripts
+
+        <!-- filepond -->
+        <x-filepond />
+
     </body>
 </html>

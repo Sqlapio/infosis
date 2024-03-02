@@ -40,6 +40,16 @@ class Formulario extends Component
         $this->hidden_botton = 'hidden';
     }
 
+    protected function final_inspeccion()
+    {
+        $count = Recorrido::where('fecha_reporte', date('d-m-Y'))->get()->count();
+
+        if ($count == 10)
+        {
+            redirect(route('images'));
+        }
+    }
+
     public function store()
     {
         try {
@@ -49,7 +59,7 @@ class Formulario extends Component
             $item_descripcion = Item::where('id', $this->item_id)->first()->descripcion;
 
             $recorrido = new Recorrido();
-            $recorrido->item_id = 1;
+            $recorrido->item_id = $this->item_id;
             $recorrido->descripcion = $item_descripcion;
             $recorrido->operatividad = $this->total_vista;
             $recorrido->fecha_reporte = date('d-m-Y');
@@ -61,6 +71,12 @@ class Formulario extends Component
             sleep(1);
 
             $this->ocultar();
+
+            $this->final_inspeccion();
+
+            // session()->flash('message', 'todo bien');
+
+
         } catch (\Throwable $th) {
             dd($th);
         }
