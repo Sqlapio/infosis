@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\UtilsController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Image;
+use App\Livewire\LoginExterno;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,10 @@ Route::view('images', 'images')
     ->name('images');
 
 Route::post('/upload/image', [Image::class, 'uploadImages'])->name("pay-plan");
+Route::get('/l/e', LoginExterno::class)->name('login-externo');
+Route::get('/v/{la}/{lo}', [UtilsController::class, 'valida_coordenadas'])->name('valida-coordenadas');
+Route::view('g', 'geolocalizacion')->name('geolocalizacion');
+
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
