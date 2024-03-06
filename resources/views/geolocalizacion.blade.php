@@ -32,7 +32,7 @@
                             lat: latitude,
                             lng: longitude,
                         };
-                        console.log(coords);
+                        console.log(coords.lat);
                     },
                     () => {
                         alert("tu navegador esta bien, pero hay un peo");

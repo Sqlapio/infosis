@@ -8,7 +8,7 @@
         <img src="{{ asset('image/logoTesoro.png') }}" alt="">
     </div>
     @else
-    <div class="w-48 h-auto">
+    <div {{ $attributes }}>
         <img src="{{ asset('image/logoTesoro.png') }}" alt="">
     </div>
     @endif
