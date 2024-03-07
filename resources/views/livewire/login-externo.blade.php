@@ -3,7 +3,7 @@
         <!-- Cedula de Identidad -->
         <div>
             <x-input-label for="cedula" :value="__('Cédula de Identidad')" />
-            <x-text-input wire:model="cedula" id="cedula" class="block mt-1 w-full" type="text" name="cedula" required autofocus autocomplete="username" />
+            <x-text-input wire:model="cedula" id="cedula" class="block mt-1 w-full" type="text" name="cedula" required autocomplete="username"/>
             <x-input-error :messages="$errors->get('cedula')" class="mt-2" />
         </div>
 
@@ -13,6 +13,7 @@
             </svg>
             <span class="text-center items-center">Validar usuario</span>
         </button>
+
         @script
             <script>
                     if(navigator.geolocation) {
@@ -28,11 +29,11 @@
                             },
                             () => {
                                 alert("tu navegador esta bien, pero hay un peo");
-                            }
-                        );
+                            });
                     }else{
                         alert("tu navegador no va para el Baile");
                     }
+
             </script>
         @endscript
 </div>

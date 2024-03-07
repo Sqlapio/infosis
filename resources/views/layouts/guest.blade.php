@@ -20,22 +20,27 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
+    <body class="font-sans text-gray-900 antialiased h-dvh">
 
         <!-- Notificaciones WireUI -->
         <x-notifications position="top-right" />
         <x-dialog z-index="z-50" blur="md" align="center" />
 
-        <div class="min-h-screen flex flex-col justify-center items-center px-6 sm:pt-0 dark:bg-gray-900">
-            <div class="flex justify-center text-gray-500">
-                <img src="{{ asset('image/logoTesoro.png') }}" class="w-20 h-auto" alt="">
-            </div>
+            <div class="flex flex-col min-h-screen justify-center items-center px-6 mt-auto sm:pt-0 dark:bg-gray-900 overflow-hidden">
+                <div class="items-center">
+                    <img src="{{ asset('image/logoTesoro.png') }}" class="w-auto h-auto" alt="">
+                </div>
 
-            {{-- <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg"> --}}
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+                {{-- <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg"> --}}
+                <div class="w-full sm:max-w-md mt-6 px-6 py-4 overflow-hidden sm:rounded-lg">
+                    {{ $slot }}
+                </div>
+                <footer class="bg-white rounded-lg dark:bg-gray-900 m-4">
+                    <div class="w-full max-w-screen-md mx-auto p-5 md:py-8">
+                        <span class="block text-sm text-gray-500 text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/" class="hover:underline">Desarrollado por: SqlapioTechnology LLC™</a>. All Rights Reserved.</span>
+                    </div>
+                </footer>
             </div>
-        </div>
 
         <!-- Livewire V3 -->
         @livewireScripts

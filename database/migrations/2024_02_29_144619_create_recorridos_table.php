@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('fecha_reporte');
             $table->string('area')->default('8.820');
             $table->string('total_personal');
-            $table->string('observaciones')->default('Sin observaciones relevantes');
+            $table->string('observaciones')->nullable()->default('Sin observaciones relevantes');
             $table->string('responsable');
             $table->timestamps();
         });

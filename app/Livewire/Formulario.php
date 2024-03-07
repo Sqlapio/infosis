@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Http\Controllers\UtilsController;
 use App\Models\Item;
 use App\Models\Recorrido;
 use App\Models\Subitem;
@@ -46,6 +47,11 @@ class Formulario extends Component
 
         if ($count == 10)
         {
+            $user = Auth::user()->name;
+
+            /**Log de recorrido */
+            UtilsController::log_recorrido($user, $entrada = null, $accion = 'Finalizo el recorrido, formulario cargado en su totalidad');
+            
             redirect(route('images'));
         }
     }
