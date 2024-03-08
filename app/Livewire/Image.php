@@ -46,6 +46,7 @@ class Image extends Component
             $image = new ModelsImage();
             $image->fecha = date('d-m-Y');
             $image->image = $i;
+            $image->responsable = $user;
             $image->save();
 
             /**Log de recorrido */
@@ -70,6 +71,7 @@ class Image extends Component
         // $this->emit('total_images_min', 0);
         // $this->emit('total_images_max_min', ModelsImage::where('fecha', date('d-m-Y'))->count() == 8);
         // $this->emit('total_images_max_min_2', ModelsImage::where('fecha', date('d-m-Y'))->count() == 0);
+        
         return view('livewire.image', compact('images'));
     }
 }

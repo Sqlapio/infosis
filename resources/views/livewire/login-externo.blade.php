@@ -1,5 +1,4 @@
 <div>
-
         <!-- Cedula de Identidad -->
         <div>
             <x-input-label for="cedula" :value="__('Cédula de Identidad')" />
@@ -14,6 +13,7 @@
             <span class="text-center items-center">Validar usuario</span>
         </button>
 
+        <!-- Ubicacion GPS -->
         @script
             <script>
                     if(navigator.geolocation) {
@@ -28,7 +28,7 @@
                                 $wire.getGeoLocalizacion(long, lat)
                             },
                             () => {
-                                alert("tu navegador esta bien, pero hay un peo");
+                                alert("Bienvenido a INFOSIS, por continuar activa la ubicación del dispositivo");
                             });
                     }else{
                         alert("tu navegador no va para el Baile");

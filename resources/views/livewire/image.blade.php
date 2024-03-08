@@ -1,8 +1,10 @@
 
+
 <div class="p-5">
     <div class="{{ $hidden_upload }}">
-        <input multiple type="file" id="filepond" wire.model="file" />
+        <input type="file"  id="filepond" multiple  data-allow-reorder="true" data-max-file-size="5MB" data-max-files="3" wire.model="file" style="text-decoration-color: #ec0303;">
     </div>
+
 
     {{-- Tabla Responsive para movil --}}
     <div class="grid grid-cols-1 sm:grid-cols-1 gap-4 md:hidden rounded-lg p-1 shadow-sm shadow-indigo-100">

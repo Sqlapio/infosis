@@ -2,38 +2,48 @@
         {{-- Jquery Library --}}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         {{-- File Pond Js Cdn --}}
+        <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
         <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
         {{-- File Pond Jquerys Cdn --}}
         <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
         {{-- File Pond Image Preview Cdn --}}
         <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+       
         <script>
-            FilePond.registerPlugin(FilePondPluginImagePreview);
+            FilePond.registerPlugin(
+                FilePondPluginImagePreview, 
+                FilePondPluginImageValidateSize,  
+                FilePondPluginFileValidateSize,
+                );
 
             $("#filepond").filepond({
-                allowImagePreview: true
-                , allowImageFilter: true
-                , imagePreviewHeight: 200
-                , allowMultiple: true
-                , allowFileTypeValidation: true
-                , allowRevert: true
-                , acceptedFileTypes: ["image/png", "image/jpeg", "image/jpg"]
-                , maxFiles: 6
-                , credits: false
-                , server: {
+                allowImagePreview: true,
+                allowImageFilter: true,
+                allowFileSizeValidation: true,
+                allowImageValidateSize: true,
+                imageValidateSizeMaxWidth: 5000,
+                imageValidateSizeMaxHeight: 5000,
+                acceptedFileTypes: ["image/png", "image/jpeg", "image/jpg"],
+                maxFiles: 6,
+                credits: false,
+                server: {
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                    , }
-                    , url: "/upload/image"
-                    , process: false,
+                    },
+                    url: "/upload/image",
+                    process: true,
                     // revert: true,
-                    restore: "/delete"
-                    , fetch: false
-                , }
-            , });
+                    restore: "/delete",
+                    fetch: false,
+                },
+            });
+
 
             const labels_es = {
-                labelIdle: 'Arrastra y suelta tus archivos o <span class = "filepond--label-action"> Examinar <span>',
+                labelIdle: 'Cargar imagen <span class = "filepond--label-action"> Examinar <span>',
                 labelInvalidField: "El campo contiene archivos inválidos",
                 labelFileWaitingForSize: "Esperando tamaño",
                 labelFileSizeNotAvailable: "Tamaño no disponible",

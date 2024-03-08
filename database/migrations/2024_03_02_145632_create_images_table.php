@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('fecha');
             $table->string('image', 1024);
+            $table->string('responsable');
             $table->timestamps();
         });
     }

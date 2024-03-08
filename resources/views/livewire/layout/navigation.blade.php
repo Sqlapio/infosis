@@ -36,7 +36,7 @@ $logout = function (Logout $logout) {
                 </div>
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('images')" :active="request()->routeIs('images')" wire:navigate>
+                    <x-nav-link :href="route('images')" :active="request()->routeIs('images')">
                         {{ __('Memoria Fotografica') }}
                     </x-nav-link>
                 </div>

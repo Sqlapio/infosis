@@ -56,7 +56,7 @@ class LoginExterno extends Component
                 }else{
 
                     /**Log de recorrido */
-                    UtilsController::log_recorrido($user, $coords->entrada, $accion = 'Usuario fuera de ubicacion');
+                    UtilsController::log_recorrido($user, $entrada = null, $accion = 'El usuario se encuentra fuera de al ubicacion');
                     
                     $this->notification()->error(
                         $title = 'NOTIFICACIÓN',
