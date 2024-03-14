@@ -22,13 +22,10 @@ class Image extends Component
         try {
             //code...
             $total_images = ModelsImage::where('fecha', date('d-m-Y'))->count();
+
             if($total_images == 6)
             {
                 $this->hidden_upload = 'hidden';
-                $this->notification()->error(
-                    $title = 'NOTIFICACIÓN',
-                    $description = 'Ya las imagenes fueron cargada'
-                );
             }
 
         } catch (\Throwable $th) {
@@ -61,17 +58,6 @@ class Image extends Component
     {
         $this->hiddenUpload();
         $images = ModelsImage::where('fecha', date('d-m-Y'))->get();
-        // $images = ModelsImage::where('fecha', date('d-m-Y'))->get();
-        // $this->emit('images', $images);
-        // $this->emit('hidden_upload', $this->hidden_upload);
-        // $this->emit('user', Auth::user()->name);
-        // $this->emit('fecha', date('d-m-Y'));
-        // $this->emit('total_images', ModelsImage::where('fecha', date('d-m-Y'))->count());
-        // $this->emit('total_images_max', 8);
-        // $this->emit('total_images_min', 0);
-        // $this->emit('total_images_max_min', ModelsImage::where('fecha', date('d-m-Y'))->count() == 8);
-        // $this->emit('total_images_max_min_2', ModelsImage::where('fecha', date('d-m-Y'))->count() == 0);
-        
         return view('livewire.image', compact('images'));
     }
 }

@@ -1,15 +1,15 @@
 
 
-<div class="p-5">
+<div class="p-1">
     <div class="{{ $hidden_upload }}">
         <input type="file"  id="filepond" multiple  data-allow-reorder="true" data-max-file-size="5MB" data-max-files="3" wire.model="file" style="text-decoration-color: #ec0303;">
     </div>
 
-
     {{-- Tabla Responsive para movil --}}
-    <div class="grid grid-cols-1 sm:grid-cols-1 gap-4 md:hidden rounded-lg p-1 shadow-sm shadow-indigo-100">
+    <div class="grid grid-cols-1 sm:grid-cols-1 gap-4 md:hidden rounded-lg p-1">
         @foreach ($images as $item)
-        <div class="bg-white p-4 rounded-xl  shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <div class="bg-white p-4 rounded-xl border border-black shadow-[1px_5px_8px_0px_#1a202c]
+        ">
             <a href="{{ asset('/storage/'.$item->image) }}" target="_blank">
                 <img src="{{ asset('/storage/'.$item->image) }}" class="h-56 w-full rounded-md object-cover"/>
                 <div class="mt-2">

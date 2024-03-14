@@ -20,7 +20,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased h-dvh">
+    <body class="font-sans text-gray-900 antialiased">
 
         <!-- Notificaciones WireUI -->
         <x-notifications position="top-right" />
