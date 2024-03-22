@@ -92,7 +92,7 @@ $logout = function (Logout $logout) {
             </x-responsive-nav-link>
         </div> --}}
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('inspeccion')" :active="request()->routeIs('inspeccion')" wire:navigate>
+            <x-responsive-nav-link :href="route('inspeccion')" :active="request()->routeIs('inspeccion')" >
                 {{ __('Inspeccion') }}
             </x-responsive-nav-link>
         </div>

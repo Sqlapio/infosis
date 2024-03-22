@@ -11,6 +11,7 @@ use Livewire\Component;
 
 class Formulario extends Component
 {
+    public $atr = 'true';
     public $item_id;
     public $aria_expanded = 'true';
     public $item_selected = [];
@@ -52,7 +53,7 @@ class Formulario extends Component
 
             /**Log de recorrido */
             UtilsController::log_recorrido($user, $entrada = null, $accion = 'Finalizo el recorrido, formulario cargado en su totalidad');
-            
+
             redirect(route('images'));
         }
     }
