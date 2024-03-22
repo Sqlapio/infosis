@@ -18,21 +18,19 @@
         <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
         <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
 
-        <!-- wireUI -->
-        <wireui:scripts />
-
-        <!-- Livewire V3 -->
+        <!-- Styles -->
         @livewireStyles
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+        @vite(['resources/css/app.css'])
 
     </head>
     <body class="font-sans antialiased">
 
         <!-- Notificaciones WireUI -->
-        <x-notifications position="top-right" />
-        <x-dialog z-index="z-50" blur="md" align="center" />
+        {{-- <x-notifications position="top-right" />
+        <x-dialog z-index="z-50" blur="md" align="center" /> --}}
         
         <div class="min-h-screen bg-white">
             <livewire:layout.navigation />
@@ -50,10 +48,13 @@
             <main>
                 {{ $slot }}
             </main>
+            
         </div>
 
         <!-- Livewire V3 -->
         @livewireScripts
+
+        @vite('resources/js/app.js')
 
         <!-- filepond -->
         <x-filepond />

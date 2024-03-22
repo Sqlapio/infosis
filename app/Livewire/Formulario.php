@@ -12,6 +12,7 @@ use Livewire\Component;
 class Formulario extends Component
 {
     public $item_id;
+    public $aria_expanded = 'true';
     public $item_selected = [];
 
     public $total_vista;
@@ -74,7 +75,7 @@ class Formulario extends Component
             $recorrido->responsable = $user;
             $recorrido->save();
 
-            sleep(1);
+            sleep(.5);
 
             $this->ocultar();
 
@@ -90,11 +91,15 @@ class Formulario extends Component
 
     public function render()
     {
+        $expanded = $this->aria_expanded;
         $item_id = $this->item_id;
         $total = $this->total_vista;
         $items = Item::find($this->item_id);
+        // $items = Item::with('get_subitems')->get();
+
+        // dd($items);
 
 
-        return view('livewire.formulario', compact('items', 'total', 'item_id'));
+        return view('livewire.formulario', compact('items', 'total', 'item_id', 'expanded'));
     }
 }

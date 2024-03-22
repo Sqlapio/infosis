@@ -11,47 +11,76 @@ use App\Models\Subitem;
     }
 @endphp
 <div>
-    @if(isset($validate))
-        <div class="flex justify-center">
-            <h3 class="mb-5 text-md font-extrabold text-black dark:text-white badge badge-outline p-4 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">{{ $items->descripcion }}</h3>
-        </div>
-        <div class="grid w-4/5 mx-auto gap-3 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 lg:w-full">
-            <div class="m-auto radial-progress bg-slate-500 text-green-300 border-4 border-slate-500 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]" style="--value:{{ $total > 0 ? $total : 0 }}; --size:7rem; --thickness: 8px;" role="progressbar">{{ $total }}%</div>
-        </div>
-    @else
-        <div class="flex justify-center">
-            <h3 class="mb-5 text-md font-bold text-gray-900 dark:text-white badge badge p-4">{{ $items->descripcion }}</h3>
-        </div>
-        <div class="grid w-4/5 mx-auto gap-3 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 lg:w-full">
-            <div class="m-auto radial-progress bg-slate-500 text-green-300 border-4 border-slate-500" style="--value:{{ $total > 0 ? $total : 0 }}; --size:7rem; --thickness: 8px;" role="progressbar">{{ $total }}%</div>
-            @foreach ($items->get_subitems as $subitem)
-            <div {{ $hidden_item }}>
-                <input type="checkbox" id="{{ $subitem->id }}" wire:model.live="item_selected" wire:click="total()" value="{{ $subitem->id }}" class="hidden peer">
-                <label for="{{ $subitem->id }}" class="inline-flex justify-center items-center text-center w-full h-full p-2 text-gray-500
-                                bg-white border-2 border-gray-200 rounded-full cursor-pointer dark:hover:text-gray-300
-                                dark:border-gray-700 peer-checked:border-green-300 peer-checked:shadow-[0_3px_10px_rgb(0,0,0,0.2)]
-                                peer-checked:text-black hover:text-gray-600 dark:peer-checked:text-gray-300
-                                hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                    <div class="block">
-                        <div class="w-full text-xs font-extrabold">{{ $subitem->descripcion }}</div>
-                    </div>
-                </label>
+    {{-- <div id="accordion-collapse" data-accordion="collapse">
+    @foreach($items as $value)
+        <h2 id="accordion-collapse-heading-{{ $item->id }}">
+            <button type="button" class="flex items-center focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 justify-between p-5 w-full font-medium text-left border border-gray-200 dark:border-gray-700 border-b-0 text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-t-xl" data-accordion-target="#accordion-collapse-body-{{ $value->id }}" aria-expanded="{{ $expanded }}" aria-controls="accordion-collapse-body-{{ $value->id }}">
+            <span>{{ $value->descripcion }}</span>
+            <svg data-accordion-icon class="w-6 h-6 shrink-0 rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </h2>
+            <div id="accordion-collapse-body-{{ $value->id }}" aria-labelledby="accordion-collapse-heading-{{ $value->id }}">
+                <div class="p-5 border border-gray-200 dark:border-gray-700 dark:bg-gray-900 border-b-0">
+                    @foreach($value->get_subitems as $subitem)
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">{{ $subitem->descripcion}}</p>
+                    @endforeach
+                </div>
             </div>
-            @endforeach
-            <div {{ $hidden_observaciones }}>
-                <textarea id="message" rows="4" wire:model="observaciones" class="block p-2.5 w-full text-sm text-gray-900 rounded-xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describa su observación"></textarea>
+    @endforeach
+    </div> --}}
+    {{-- <div id="accordion-collapse-{{ $items->id }}" data-accordion="collapse">
+        <h2 id="accordion-collapse-heading-{{ $items->id }}">
+            <button @click="selected !== {{ $items->id }} ? selected = {{ $items->id }} : selected = null" type="button" class="flex items-center focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 justify-between p-5 w-full font-medium text-left border border-black dark:border-gray-700 text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full" data-accordion-target="#accordion-collapse-body-{{ $items->id }}" aria-expanded="false" aria-controls="accordion-collapse-body-{{ $items->id }}">
+            <span>{{ $items->id }}.- {{ $items->descripcion }}</span>
+            <svg data-accordion-icon class="w-6 h-6 shrink-0 rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </h2>
+            <div id="accordion-collapse-body-{{ $items->id }}" aria-labelledby="accordion-collapse-heading-{{ $items->id }}">
+                <div class="p-5 mt-2 dark:bg-gray-900" x-ref="container{{ $items->id }}" x-bind:style="selected == {{ $items->id }} ? 'max-height: ' + $refs.container{{ $items->id }}.scrollHeight + 'px' : ''">
+                    @foreach($items->get_subitems as $subitem)
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">{{ $subitem->descripcion}}</p>
+                    @endforeach
+                </div>
             </div>
-            <div {{ $hidden_botton }}>
+    </div> --}}
+        <div class="bg-white max-w-xl mx-auto border border-black rounded-xl">
+		    <ul class="shadow-box">
 
-                <button type="submit" wire:click.prevent="store()" class="flex justify-center w-full h-full rounded-full border border-green-300 bg-slate-500 py-2 px-4 text-sm items-center sm:text-center font-bold text-white shadow-sm hover:bg-check-green">
-                    <svg xmlns="http://www.w3.org/2000/svg" wire:loading wire:target="store" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="animate-spin h-5 w-5 mr-3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-                    </svg>
-                    <span class="text-center items-center">Guardar Inspección</span>
-                </button>
-            </div>
-        </div>
-    @endif
+                <li class="relative" x-data="{selected:null}">
+
+                    <button type="button" class="w-full px-8 py-6 text-left" @click="selected !== {{ $items->id }} ? selected = {{ $items->id }} : selected = null">
+                        <div class="flex items-center justify-between">
+                            <span>{{ $items->id }}.- {{ $items->descripcion }}</span>
+                            <span class="ico-plus"></span>
+                        </div>
+                    </button>
+
+                    <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container{{ $items->id }}" x-bind:style="selected == {{ $items->id }} ? 'max-height: ' + $refs.container{{ $items->id }}.scrollHeight + 'px' : ''">
+                        <div class="p-6">
+                        @foreach($items->get_subitems as $subitem)
+                        <div class="flex justify-between">
+                            <p>{{ $subitem->descripcion}}</p>
+                            <div class="flex items-center me-4">
+                                <div class="flex items-center me-4">
+                                    <input id="red-radio-{{ $subitem->id }}" type="radio" value="true" name="colored-radio" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="red-radio-{{ $subitem->id }}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Red</label>
+                                </div>
+                                <div class="flex items-center me-4">
+                                    <input id="green-radio-{{ $subitem->id }}" type="radio" value="" name="colored-radio" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="green-radio-{{ $subitem->id }}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Green</label>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        </div>
+                    </div>
+
+                </li>
+
+			</ul>
+	    </div>
+
+
 </div>
 
 
